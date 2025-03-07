@@ -1,0 +1,49 @@
+//https://leetcode.com/problems/minimum-index-sum-of-two-lists/
+#include <vector>
+
+class Solution {
+public:
+
+// For this problem we are looking for the minimum index sum for two objects containing the same value in 
+// different lists
+// My solution here is an O(n^2) solution and is not the most optimal but uses no #include data structures
+// Other than the provided vector
+// 73ms run time bottom 11.55%
+    vector<string> findRestaurant(vector<string>& list1, vector<string>& list2) {
+        vector<string> words;
+        vector<int> word_value;
+
+        for (int i = 0; i < list1.size(); ++i)
+        {
+            for (int x = 0; x < list2.size(); ++x)
+            {
+                if (list1[i] == list2[x])
+                {
+                    words.push_back(list1[i]);
+                    word_value.push_back(i + x);
+                }
+            }
+        }
+
+        int min = word_value[0];
+
+        for (int i = 0; i < word_value.size(); ++i)
+        {
+            if (word_value[i] < min)
+            {
+                min = word_value[i];
+            }
+        }
+
+        vector<string> total_words;
+        for (int x = 0; x < word_value.size(); ++x)
+        {
+            if (word_value[x] == min)
+            {
+                total_words.push_back(words[x]);
+            }
+        }
+
+        return total_words;
+    }
+};
