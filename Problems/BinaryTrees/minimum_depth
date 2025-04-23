@@ -1,0 +1,22 @@
+//https://leetcode.com/problems/minimum-depth-of-binary-tree/description/
+
+// This is in O(n) we could make it sometimes faster by checking if one side
+// is 1 or some minimum we expect
+// Space is in O(1) 
+class Solution {
+public:
+    int minDepth(TreeNode* root) {
+        if (root == nullptr)
+            return 0;
+        int left = minDepth(root -> left);
+        int right = minDepth(root -> right);
+        if (left && right) //To make sure left and right are not 0 if they are 0 we should not return them
+                            // since that means there is no node on that side.
+            return (left > right) ? right + 1: left + 1;
+        if (left)
+            return left + 1;
+        else 
+            return right + 1;
+    }
+};
+

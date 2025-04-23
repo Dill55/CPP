@@ -1,0 +1,38 @@
+//https://leetcode.com/problems/binary-tree-level-order-traversal/description/?envType=problem-list-v2&envId=breadth-first-search
+
+
+// Time is in O(n) space is also in O(n)
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        
+        vector<vector<int>> masterList{};
+        if (root == nullptr)
+            return masterList;
+        vector<TreeNode *> bfs{};
+
+        bfs.push_back (root);
+
+        while (!bfs.empty())
+        {
+            vector<int> level{};
+            for (auto Node : bfs)
+            {
+                
+                level.push_back(Node->val);
+            }
+            vector<TreeNode *> temp{};
+            for (auto Node : bfs)
+            {
+                if (Node -> left != nullptr)
+                    temp.push_back(Node -> left);
+                if (Node -> right != nullptr)
+                    temp.push_back(Node -> right);
+            }
+            masterList.push_back (level);
+            bfs = temp;
+        }
+
+        return masterList;
+    }
+};
