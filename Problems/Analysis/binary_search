@@ -1,0 +1,39 @@
+//https://leetcode.com/problems/binary-search/
+
+
+//The following is a binary search algorithm for a sorted list.
+// Median solution of 0ms since it runs in O(log(n))
+// Every pass of the for loop we reduce the places we are looking for the target in half until
+// either the number doesn't exist or we reach the number we are looking for where we return that number's index
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int min = 0;
+        int max = nums.size();
+
+        int half = (max + min) /2;
+
+        if (max == 0)
+            return -1;
+        if (max == 1)
+            return nums[0] == target ? 0 : -1;
+        while (min < max)
+        {
+            if (nums[half] == target)
+                return half;
+            
+            if (target < nums[half])
+            {
+                max = half; 
+            }
+            else
+            {
+                min = half + 1;
+            }
+            half = (max + min) /2;
+        }
+        
+        
+        return -1;
+    }
+};
